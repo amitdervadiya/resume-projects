@@ -20,8 +20,15 @@ app.set('view engine', 'ejs');
 // middlewares
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+// Main static folder for CSS, JS, images
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Uploads folder for profile images, files, etc.
 app.use('/upload', express.static(path.join(__dirname, 'upload')));
+
+// If you need extra aliases for the same public folder
+app.use(['/category', '/subcategory', '/excategory', '/product'], express.static(path.join(__dirname, 'public')));
+
 
 // session setup
 app.use(session({

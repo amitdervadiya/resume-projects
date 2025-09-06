@@ -3,43 +3,62 @@ const categorySchema = require('../model/categorySchema')
 const fs = require('fs')
 
 module.exports.addsubcat = async (req, res) => {
-  await categorySchema.find({}).then((data) => {
-    res.render('addsubcategory', { data })
-  })
-}
+  try {
+    const data = await categorySchema.find({});
+    return res.render('addsubcategory', { data });
+  } catch (err) {
+    console.error(err);
+    return res.redirect('/subcategory/addsubcat');
+  }
+};
+
 module.exports.addsubcategory = async (req, res) => {
-  await subcategorySchema.create(req.body).then(() => {
-    res.redirect('/subcategory/addsubcat')
-  })
-}
+  try {
+    await subcategorySchema.create(req.body);
+    return res.redirect('/subcategory/addsubcat');
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Server Error");
+  }
+};
 
 module.exports.viewsubcatgory = async (req, res) => {
-
-  await subcategorySchema.find({}).populate("categoryid").then((data) => {
-    console.log(data)
-    res.render('viewsubcatgory', { data })
-  })
-}
+  try {
+    const data = await subcategorySchema.find({}).populate("categoryid");
+    return res.render('viewsubcatgory', { data });
+  } catch (err) {
+    console.error(err);
+    return res.redirect('/subcategory/addsubcat');
+  }
+};
 
 module.exports.editsubcat = async (req, res) => {
-  let category = categorySchema.find({});
-
-  await subcategorySchema.findById(req.query.id).then((data) => {
-    console.log(data)
-    res.render('editsubcat', { data ,category})
-  })
-}
+  try {
+    const category = await categorySchema.find({});
+    const data = await subcategorySchema.findById(req.query.id);
+    return res.render('editsubcat', { data, category });
+  } catch (err) {
+    console.error(err);
+    return res.redirect('/subcategory/viewsubcatgory');
+  }
+};
 
 module.exports.deletesubcat = async (req, res) => {
-  console.log(req.query, "id is here")
-  await subcategorySchema.findByIdAndDelete(req.query.id).then((data) => {
-    console.log(data)
-    res.redirect('/subcategory/viewsubcatgory')
-  })
-}
+  try {
+    await subcategorySchema.findByIdAndDelete(req.query.id);
+    return res.redirect('/subcategory/viewsubcatgory');
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Server Error");
+  }
+};
 
-module.exports.updatesubcat = async (req,res)=>{
-  await subcategorySchema.findByIdAndUpdate(req.body.id,req.body).then((data)=>{
-    res.redirect('/subcategory/viewsubcatgory')
-  })
-}
+module.exports.updatesubcat = async (req, res) => {
+  try {
+    await subcategorySchema.findByIdAndUpdate(req.body.id, req.body);
+    return res.redirect('/subcategory/viewsubcatgory');
+  } catch (err) {
+    console.error(err);
+    return res.status(500).send("Server Error");
+  }
+};
