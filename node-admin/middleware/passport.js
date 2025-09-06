@@ -3,23 +3,23 @@ const localst = require('passport-local').Strategy
 const adminschema = require('../model/adminSchema')
 
 passport.use('local', new localst(
-
-    { usernameField: 'email' }, async (email, password, done) => {
-        let admin = await adminschema.findOne({ email, password })
-        if (admin) {
-            if (admin.password == password) {
-                return done(null, admin)
-            }
-            else {
-                return done(null, false)
-            }
+    { usernameField: 'email' },
+    async (email, password, done) => {
+      try {
+        let admin = await adminschema.findOne({ email });
+        if (!admin) return done(null, false, { message: "No user found" });
+  
+        if (admin.password === password) {
+          return done(null, admin);
+        } else {
+          return done(null, false, { message: "Incorrect password" });
         }
-        else {
-            return done(null, false)
-        }
+      } catch (err) {
+        return done(err);
+      }
     }
-))
-
+  ));
+  
 passport.checkAuth = (req, res, next) => {
     if (req.isAuthenticated()) {
         next()

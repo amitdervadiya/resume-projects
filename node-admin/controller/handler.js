@@ -9,50 +9,24 @@ module.exports.loginform = async (req, res) => {
 
 module.exports.login = async (req, res) => {
     res.redirect('/dashboard');
-    // let admin = await adminSchema.findOne({ email: req.body.email });
-    // if (admin) {
-    //     if (admin.password === req.body.password) {
-    //         res.cookie('AdminData', admin); 
-    //         console.log('Cookies after login:', req.cookies);
-
-    //     } else {
-    //         res.redirect('/');
-    //     }
-    // } else {
-    //     res.redirect('/');
-    // }
+  
 };
 
 module.exports.dashboard = (req, res) => {
     res.render('index');
-    // if (req.cookies && req.cookies.AdminData) {
-    //     res.render('index');
-    // } else {
-    //     res.redirect('/');
-    // }
+  
 };
 
 module.exports.addAdmin = (req, res) => {
     res.render('addAdmin')
-    // if (req.cookies.AdminData) {
-    //     res.render('addAdmin')
-    // }
-    // else {
-    //     res.redirect('/')
-    // }
+   
 
 }
 module.exports.viewAdmin = async (req, res) => {
     const adminData = await adminSchema.find({})
     res.render('viewAdmin', { adminData })
-    // if (req.cookies.AdminData) {
-    //     const adminData = await adminSchema.find({})
-    //     res.render('viewAdmin', { adminData })
-
-    // }
-    // else {
-    //     res.redirect('/')
-    // }
+   res.redirect('/')
+   
 
 
 }
