@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/images/favicon.png">
+    <title>Matrix Template - The Ultimate Multipurpose admin template</title>
+    <!-- Custom CSS -->
+    <link href="assets/libs/flot/css/float-chart.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="dist/css/style.min.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+
+<body>
+    <form class="form-horizontal" action="/updateAdmin" method="post" enctype="multipart/form-data">
+        <div class="card-body">
+            <h4 class="card-title">Admin Details</h4>
+            <div class="form-group row">
+                <label for="id" class="col-sm-3 text-right control-label col-form-label">
+                    id</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="id" name="id" placeholder="id" required
+                        value="<%=data.id%>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="fname" class="col-sm-3 text-right control-label col-form-label">First
+                    Name</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="fname" name="fname" placeholder="First Name Here"
+                        required value="<%= data.fname%>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="lname" class="col-sm-3 text-right control-label col-form-label">Last
+                    Name</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="lname" name="lname" placeholder="Last Name Here"
+                        required value="<%= data.lname%>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="email" class="col-sm-3 text-right control-label col-form-label">Email</label>
+                <div class="col-sm-9">
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Email Here" required
+                        value="<%= data.email%>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="password" class="col-sm-3 text-right control-label col-form-label" required>Password</label>
+                <div class="col-sm-9">
+                    <input type="password" class="form-control" id="password" name="password"
+                        placeholder="Password Here" value="<%= data.password%>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="datepicker-autoclose"
+                    class="col-sm-3 text-right control-label col-form-label">D.O.B.</label>
+                <div class="col-sm-9 input-group">
+                    <input type="text" class="form-control" id="datepicker-autoclose" name="dob"
+                        placeholder="mm/dd/yyyy" required value="<%=data.dob%>">
+                    <div class="input-group-append">
+                        <span class="input-group-text"><i class="fa fa-calendar"></i></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="city" class="col-sm-3 text-right control-label col-form-label">City</label>
+                <div class="col-sm-9">
+                    <select class="select2 form-control custom-select" id="city" name="city"
+                        style="width: 100%; height:36px;" required value="<%=data.city%>">
+                        <option value="Ahemdabad">Ahemdabad</option>
+                        <option value="Gandhinager">Gandhinager</option>
+                        <option value="Vadodara">Vadodara</option>
+                        <option value="Rajkot">Rajkot</option>
+                        <option value="Jamnager">Jamnager</option>
+
+                    </select>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="gender" class="col-sm-3 text-right control-label col-form-label">Gender</label>
+                <div class="col-sm-9">
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="male" name="gender" value="male"
+                            <%=data.gender==='male' && 'checked' %> required>
+                        <label class="custom-control-label" for="male">Male</label>
+                    </div>
+                    <div class="custom-control custom-radio">
+                        <input type="radio" class="custom-control-input" id="female" name="gender" value="female"
+                            <%=data.gender==='female' && 'checked' %> required>
+                        <label class="custom-control-label" for="female">Female</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">Languages</label>
+                <div class="col-md-9">
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" id="gujarati" name="languages"
+                            value="gujarati" <%=data.languages.includes('gujarati') && 'checked' %> >
+                        <label class="custom-control-label" for="gujarati">Gujarati</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" id="hindi" name="languages" value="hindi"
+                            <%=data.languages.includes('hindi') && 'checked' %> >
+                        <label class="custom-control-label" for="hindi">Hindi</label>
+                    </div>
+                    <div class="custom-control custom-checkbox mr-sm-2">
+                        <input type="checkbox" class="custom-control-input" id="english" name="languages"
+                            value="english" <%=data.languages.includes('english') && 'checked' %> >
+                        <label class="custom-control-label" for="english">English</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-sm-3 text-right control-label col-form-label">Profile Photo</label>
+                <div class="col-sm-9">
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input" id="validatedCustomFile" accept="image/*"
+                            name="profile">
+                        <label class="custom-file-label" for="validatedCustomFile">Choose Profile Photo...</label>
+                        <img src="<%= data.profile%>" alt="" style="height: 50px; width: 50px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border-top">
+            <div class="card-body">
+                <button type="submit" class="btn btn-primary">Submit </button>
+            </div>
+        </div>
+    </form>
+    <script src="assets/libs/jquery/dist/jquery.min.js"></script>
+    <!-- Bootstrap tether Core JavaScript -->
+    <script src="assets/libs/popper.js/dist/umd/popper.min.js"></script>
+    <script src="assets/libs/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="assets/libs/perfect-scrollbar/dist/perfect-scrollbar.jquery.min.js"></script>
+    <script src="assets/extra-libs/sparkline/sparkline.js"></script>
+    <!--Wave Effects -->
+    <script src="dist/js/waves.js"></script>
+    <!--Menu sidebar -->
+    <script src="dist/js/sidebarmenu.js"></script>
+    <!--Custom JavaScript -->
+    <script src="dist/js/custom.min.js"></script>
+    <!--This page JavaScript -->
+    <!-- <script src="dist/js/pages/dashboards/dashboard1.js"></script> -->
+    <!-- Charts js Files -->
+    <script src="assets/libs/flot/excanvas.js"></script>
+    <script src="assets/libs/flot/jquery.flot.js"></script>
+    <script src="assets/libs/flot/jquery.flot.pie.js"></script>
+    <script src="assets/libs/flot/jquery.flot.time.js"></script>
+    <script src="assets/libs/flot/jquery.flot.stack.js"></script>
+    <script src="assets/libs/flot/jquery.flot.crosshair.js"></script>
+    <script src="assets/libs/flot.tooltip/js/jquery.flot.tooltip.min.js"></script>
+    <script src="dist/js/pages/chart/chart-page-init.js"></script>
+
+</body>
+
+</html>
