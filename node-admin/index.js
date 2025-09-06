@@ -39,7 +39,6 @@ app.use(session({
 // passport init
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(passport.checkauthrise);
 
 // routes
 app.use('/', route);
