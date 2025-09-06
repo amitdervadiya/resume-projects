@@ -30,7 +30,12 @@ app.use(session({
     secret: 'rnw',
     resave: true,
     saveUninitialized: false,
-    cookie: { maxAge: 100 * 100 * 60 }
+    cookie: {
+        httpOnly: true,
+        secure:true,
+        maxAge: 100 * 100 * 60
+    }
+
 }))
 app.use(passport.initialize())
 app.use(passport.session())
